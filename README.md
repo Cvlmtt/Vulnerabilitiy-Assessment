@@ -69,4 +69,4 @@ Non è stato in alcun modo coinvolto o testato alcun sistema di rete esterno o a
 ---
 
 © 2025 – Progetto di Vulnerability Assessment  
-Autore: *[Il tuo nome o nickname, facoltativo]*
+Autore: Mattia Cavaliere
