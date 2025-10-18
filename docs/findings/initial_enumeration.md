@@ -14,8 +14,8 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.0/24`. Dei c
 
 ## 2. Tabella sintetica degli host (dati estratti da `scans/initial_scan.nmap`)
 
-| IP | Hostname (se presente) | Porte / Servizi principali (da Nmap) | OS / note di fingerprint | Evidenze |
-|-----|------------------------|---------------------------------------|--------------------------|----------|
+| IP | Hostname (se presente) | Porte / Servizi principali (da Nmap) | OS / note di fingerprint |
+|-----|------------------------|---------------------------------------|--------------------------|
 | 192.168.56.1 | — | Tutte le 1000 porte scansionate in stati ignorati. Not shown: 846 closed, 147 filtered, 7 filtered (admin-prohibited). MAC: `0A:00:27:00:00:00`. | Too many fingerprints match — info OS non univoca. Network Distance: 1 hop. |
 | 192.168.56.100 | — | Tutte le 1000 porte in stati ignorati (1000 filtered tcp). MAC: `08:00:27:A0:92:4B` (Oracle VirtualBox NIC). | Too many fingerprints match — probabilmente VM guest VirtualBox. Network Distance: 1 hop. |
 | 192.168.56.105 | metasploitable-like host | **Numerose porte aperte:** 21/tcp (vsftpd 2.3.4), 22/tcp (OpenSSH 4.7p1), 23/tcp (telnetd), 25/tcp (Postfix), 53/tcp (BIND 9.4.2), 80/tcp (Apache 2.2.8), 111, 139, 445 (Samba smbd 3.x–4.x), 2049 (NFS), 2121 (ProFTPD 1.3.1), 3306 (MySQL 5.0.51a), 5432 (PostgreSQL 8.3.x), 5900 (VNC), 6000 (X11), 6667 (IRC UnrealIRCd), 8009 (AJP), 8180 (Tomcat). | Device type: general purpose. Running: Linux 2.6.x (OS CPE: cpe:/o:linux:linux_kernel:2.6). Network Distance: 1 hop. Service info: host names e servizi multipli (metasploitable.localdomain ecc.). |
