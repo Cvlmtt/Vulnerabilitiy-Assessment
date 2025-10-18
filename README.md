@@ -56,8 +56,9 @@ Ogni commit rappresenta un’azione concreta — una scansione, una modifica, un
 ## 📅 Stato del progetto
 
 - ✅ Configurazione ambiente completata  
-- ✅ Snapshot iniziali registrati (`vm_snapshots.md`)  
-- 🔜 Scansioni di rete iniziali (fase di ricognizione)
+- ✅ Snapshot iniziali registrati (`vm_snapshots.md`) 
+- ✅ Scansioni di rete iniziali (fase di ricognizione) -> risultati in `scans/` e `findings/`
+- 🔜 Scansioni NSE mirate, snapshot checkpoint prima di test intrusivi (stato attuale)
 
 ---
 
