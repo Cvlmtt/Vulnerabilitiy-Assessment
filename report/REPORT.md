@@ -61,12 +61,42 @@ Ogni step viene accompagnato da un commit descrittivo nel repository per garanti
 
 ---
 
-# 2.1 Inventory & Snapshot
+# 2.4 Inventory & Snapshot
 
 Il laboratorio è composto da più macchine virtuali ospitate in VirtualBox.  
 Per ogni VM è stato creato almeno uno **snapshot iniziale** (“golden snapshot”) che rappresenta lo stato stabile e documentato prima di qualsiasi attività di test.
 Tutti gli snapshot sono elencati in dettaglio nel file `vm_snapshots.md`, che riporta anche hash e note tecniche specifiche.  
 Questi snapshot costituiscono la **baseline verificabile** del laboratorio e possono essere ripristinati in qualsiasi momento per garantire l’integrità e la ripetibilità dei test.
+
+---
+
+## 2.5 Ricognizione — scansione iniziale (stato attuale)
+
+**Data esecuzione:** 2025-10-18  
+**Scopo:** identificare host attivi, porte aperte e servizi/versioni esposti sulla rete host-only del laboratorio.  
+**Nota sui log di rete:** non è stata catturata una pcap in questa fase; tutti gli output prodotti dagli strumenti sono salvati nella cartella `scans/` del repository.
+
+### Comandi eseguiti (principali)
+- Scansione TCP+service/version detection: `nmap -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.106/24`
+- Scansioni mirate web / vulnerabilità: 
+  - `nikto -h http://192.168.56.106 -o scans/nikto_web-target-1.txt`
+  - `nuclei -l target.txt -o scans/nuclei_results.txt`
+Il file `target.txt` reperibile nella cartella `scans/` contiene la lista degli indirizzi delle macchine target. 
+
+
+### File prodotti e posizione
+Tutti i file prodotti dalla ricognizione sono commitati nella repo sotto `scans/`:
+- `scans/initial_scan.xml` — output XML Nmap (importabile).
+- `scans/initial_scan.nmap` — output Nmap leggibile.
+- `scans/initial_scan.gnmap` — output grezzo per parsing.
+- `scans/nikto_web-target-1.txt` — output Nikto.
+- `scans/nuclei_results.txt` — output nuclei.
+
+### Sintesi operativa (come leggere i risultati)
+- Usare l'XML (`scans/initial_scan.xml`) per import in Metasploit o per analisi automatica.  
+- Usare `scans/initial_scan.nmap` per una lettura rapida dei servizi e delle versioni.  
+- I risultati principali (host attivi, porte aperte, servizi e versioni) sono stati sintetizzati in `findings/initial_enumeration.md`.
+
 
 ---
 
