@@ -1,9 +1,6 @@
 Data di Redazione: 22 Ottobre 2025
-
 Autore: Mattia Cavaliere
-
 Ambito di Valutazione: Network & Web Application Security (Black-Box)
-
 Target: Metasploitable 2 e Ubuntu Server + DVWA
 
 # 1. Executive Summary
