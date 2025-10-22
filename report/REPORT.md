@@ -1,7 +1,7 @@
-Data di Redazione: 22 Ottobre 2025
-Autore: Mattia Cavaliere
-Ambito di Valutazione: Network & Web Application Security (Black-Box)
-Target: Metasploitable 2 e Ubuntu Server + DVWA
+Data di Redazione: 22 Ottobre 2025  
+Autore: Mattia Cavaliere  
+Ambito di Valutazione: Network & Web Application Security (Black-Box)  
+Target: Metasploitable 2 e Ubuntu Server + DVWA  
 
 # 1. Executive Summary
 Il presente report documenta i risultati di un'attività di Vulnerability Assessment (VA) condotta su un laboratorio virtuale interno, composto da due macchine target deliberatamente vulnerabili, al fine di dimostrare competenza tecnica in ricognizione, analisi del rischio e mitigazione.
