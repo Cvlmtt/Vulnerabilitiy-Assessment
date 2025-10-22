@@ -79,3 +79,12 @@ Sono state identificate 11 vulnerabilità significative, classificate secondo la
 | Basso/Info | 2 | 18% |
 | Totale | 1 | 100% |
 
+## 3.1 Matrice dei Risultati Principali
+| ID | Vulnerabilità | Target | Servizio/Porta | Gravità Stimata |
+|----|---------------|--------|----------------|-----------------|
+| V-C01 | Accesso alla Shell Tomcat AJP (Ghostcat) | 192.168.56.105 | ajp13 (8009) | CRITICA |
+| V-C02 | Credenziali di Default su Database PostgreSQL | 192.168.56.105 | postgres (5432) | CRITICA |
+| V-A03 | Vulnerabilità del servizio FTP (Versioni) | 192.168.56.105 | ftp (21) | ALTA |
+| V-A04 | Servizio Samba configurato con vulnerabilità | 192.168.56.105 | netbios-ssn (139) | ALTA |
+| V-A05 | SQL Injection (Da verificare con ZAP) | 192.168.56.106 | http (80) - DVWA | ALTA |
+| V-A06 | Accesso remoto Telnet/SSH con credenziali deboli | 192.168.56.105 | telnet (23) / ssh (22) | ALTA |
