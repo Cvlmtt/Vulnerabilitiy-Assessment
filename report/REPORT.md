@@ -1,6 +1,9 @@
 Data di Redazione: 22 Ottobre 2025
+
 Autore: Mattia Cavaliere
+
 Ambito di Valutazione: Network & Web Application Security (Black-Box)
+
 Target: Metasploitable 2 e Ubuntu Server + DVWA
 
 # 1. Executive Summary
@@ -57,6 +60,7 @@ Il risultato di tale comando è consultabile in `scans/nmap/initial_scan.*` in f
 - 192.168.56.106 (Ubuntu Server)
 - 192.168.56.104 (Kali Linux)
 
+### 2.3.2 Scanning
 Successivamente, la fase di scansione automatizzata è stata eseguita tramite i tools `Nuclei` e `Nikto`, rispettivamente con i seguenti comandi:
 
 ```Bash
@@ -66,3 +70,15 @@ nikto -h http://192.168.56.106 -o scans/nikto_web-target-1.txt
 *Nota: il file target.txt è consultabile nella directory `scans/target.txt`. Contiene gli indirizzi IP dei target che si vuole scansionare*
 
 I risultati delle scansioni sono consultabili rispettivamente nei file `scans/nuclei_results.txt` e `scans/nikto_results.txt`. 
+
+## Sintesi dei Risultati e Rischio
+Sono state identificate 11 vulnerabilità significative, classificate secondo la loro gravità presunta o calcolata in base al potenziale impatto CVSS. 
+
+| Livello di Gravità | Conteggio | Percentual |
+|--------------------|-----------|------------|
+| Critico | 2 | 18% |
+| Alto | 4 | 36% |
+| Medio | 3 | 27% |
+| Basso/Info | 2 | 18% |
+| Totale | 1 | 100% |
+
