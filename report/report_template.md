@@ -1,0 +1,9 @@
+| Sezione | Contenuto | Obiettivo per il CV |
+|---------|-----------|---------------------|
+| 0. Copertina & Indice | "Titolo, Data, Autore, Target del VA. | Professionalità, Organizzazione. |
+| 1. Executive Summary | "Non Tecnico. Riepilogo del lavoro (scopo, metodologia) e risultati chiave di alto livello (es. ""3 vulnerabilità critiche trovate che permettono l'accesso a livello root"") e valutazione del rischio globale." | Capacità di sintesi e Risk Communication. |
+| 2. Overview e Metodologia | "2.1. Scopo e Ambito: Obiettivi del progetto e perimetro (IP .105 e .106). 2.2. Architettura: Dettagli del laboratorio (VM, Host-Only). 2.3. Metodologia (VA Approach): Fasi seguite (Discovery, Scanning, Analysis, Reporting) e strumenti utilizzati (Nmap, Nikto, Nuclei, [Prossimi tool])." | Trasparenza metodologica e conoscenza degli standard. |
+| 3. Sintesi dei Risultati e Rischio | "Matrice Rischio: Tabella riassuntiva di tutte le vulnerabilità classificate per Gravità (Critico, Alto, Medio, Basso) e Target." | Analisi del dato e Prioritizzazione. |
+| 4. Dettaglio delle Vulnerabilità | "Per ogni Critico/Alto/Medio, includi: Titolo, Descrizione, Impatto, CVSS Score, Evidenza (PoC), Raccomandazioni di Mitigazione." | Profondità tecnica e capacità di Problem-Solving. |
+| 5. Conclusioni e Next Steps | "Riassunto delle azioni future (es. ri-testing, espansione del laboratorio) e della curva di apprendimento." | Visione strategica e impegno a lungo termine. | 
+| 8. Appendici | "Glossario (CVSS), Riferimenti Normativi (OWASP Top 10), Output Grezzi dei Tool (o riferimento alla repo GitHub)." | Documentazione completa. |
