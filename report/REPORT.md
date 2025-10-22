@@ -1,112 +1,68 @@
-# Report — Vulnerability Assessment Lab
-
-## Indice
-1. Executive summary
-2. Overview
-   1. Inventory & Snapshots
-3. Details
-4. Findings
-5. Recommended mitigations
+Data di Redazione: 22 Ottobre 2025
+Autore: Mattia Cavaliere
+Ambito di Valutazione: Network & Web Application Security (Black-Box)
+Target: Metasploitable 2 e Ubuntu Server + DVWA
 
 # 1. Executive Summary
+Il presente report documenta i risultati di un'attività di Vulnerability Assessment (VA) condotta su un laboratorio virtuale interno, composto da due macchine target deliberatamente vulnerabili, al fine di dimostrare competenza tecnica in ricognizione, analisi del rischio e mitigazione.
 
-Il presente report documenta le attività di **Vulnerability Assessment** condotte in ambiente virtuale controllato, con l’obiettivo di individuare, analizzare e documentare vulnerabilità presenti in sistemi e servizi configurati intenzionalmente con differenti livelli di esposizione.  
-Il progetto è stato sviluppato a scopo formativo e di ricerca, seguendo le buone pratiche di sicurezza informatica e mantenendo un approccio etico e metodico in ogni fase del lavoro.
+L'analisi preliminare ha rivelato una postura di sicurezza Estremamente Critica su entrambi i sistemi. Sono state identificate un totale di 11 vulnerabilità significative (rischio Alto o Critico), di cui 2 classificate come CRITICHE. Le criticità sono principalmente dovute all'utilizzo di software obsoleto (Metasploitable 2) e configurazioni di default insicure (DVWA).
 
-L’ambiente di laboratorio è costituito da più macchine virtuali interconnesse in una rete isolata, simulando un’infrastruttura di produzione ridotta ma realistica.  
-Le attività principali includono:
+Le vulnerabilità più gravi permettono a un attaccante non autenticato:
+1. Accesso a file di sistema e potenziale RCE (Remote Code Execution) su Metasploitable 2.
+2. Completa compromissione del database tramite credenziali di default.
 
-- Configurazione dell’ambiente di test e creazione di snapshot delle VM;
-- Ricognizione e analisi dei servizi esposti tramite scansioni di rete (TCP/UDP);
-- Valutazione delle vulnerabilità identificate con strumenti automatici e manuali;
-- Documentazione dei risultati e proposta di mitigazioni tecniche.
+Raccomandazione Immediata: Si raccomanda di procedere immediatamente alla verifica e mitigazione delle vulnerabilità Critiche e Alte, in particolare quelle relative ai servizi esposti su Metasploitable 2.
 
-Il progetto adotta un approccio **evidence-based**, in cui ogni fase viene registrata, documentata e supportata da file, log o screenshot presenti nel repository.  
-Tale metodologia consente di garantire **ripetibilità, tracciabilità e trasparenza** dell’intero processo.
+# 2. Overview e Metodologia
+## 2.1 Scopo e Obiettivi
+L'obiettivo primario di questo VA è stato quello di identificare, analizzare e classificare le vulnerabilità di sicurezza a livello di rete e applicativo presenti nel laboratorio virtuale, in un'ottica di miglioramento della sicurezza informatica. 
 
----
-
-# 2. Overview
-
-## 2.1 Scopo del laboratorio
-
-L’obiettivo generale è realizzare un ambiente sicuro e controllato in cui poter studiare e sperimentare le fasi tipiche di un’attività di vulnerability assessment, utilizzando esclusivamente macchine e software di cui si dispone piena proprietà o controllo.  
-Il laboratorio è stato progettato per riprodurre scenari comuni di esposizione a rischio — come server web vulnerabili, servizi di autenticazione deboli o configurazioni non sicure — al fine di analizzare le superfici d’attacco e comprendere le dinamiche di rilevamento e mitigazione.
-
-## 2.2 Architettura e strumenti
-
-- **Host principale:** sistema Fedora Linux con VirtualBox come hypervisor (dettagli in `HOST_INFO.md`);
-- **Rete di laboratorio:** configurazione Host-Only per l’interconnessione tra VM, con NAT per l’accesso esterno se necessario;
-- **Topologia:** un host attaccante (Kali Linux) e più target configurati con servizi vulnerabili o legacy;
-- **Isolamento:** il laboratorio è completamente separato dalla rete reale, senza bridge verso connessioni esterne;
-- **Strumenti principali:**
-  - **Nmap** per la ricognizione e l’enumerazione dei servizi;
-  - **Nikto** e **nuclei** per la scansione di vulnerabilità note su servizi web;
-  - **Metasploit Framework** per il testing controllato di exploit;
-  - **Wireshark** e **tcpdump** per la cattura e l’analisi del traffico;
-  - **Script personalizzati** (bash/python) per automatizzare fasi di scanning e logging.
-
-## 2.3 Metodo di lavoro
-
-Il laboratorio segue un ciclo metodologico ispirato alle principali fasi del vulnerability assessment:
-
-1. **Preparazione e baseline:** configurazione delle VM e snapshot iniziali;
-2. **Ricognizione:** identificazione degli host e dei servizi attivi;
-3. **Enumerazione:** raccolta di informazioni dettagliate su versioni, porte e protocolli;
-4. **Valutazione delle vulnerabilità:** confronto con database CVE e test con tool automatici;
-5. **Analisi e reporting:** classificazione dei rischi e documentazione dei risultati;
-6. **Mitigazioni e verifica:** proposta di correzioni e test successivi (in fasi future).
-
-Ogni step viene accompagnato da un commit descrittivo nel repository per garantire la tracciabilità temporale del lavoro svolto.
-
----
-
-# 2.4 Inventory & Snapshot
-
-Il laboratorio è composto da più macchine virtuali ospitate in VirtualBox.  
-Per ogni VM è stato creato almeno uno **snapshot iniziale** (“golden snapshot”) che rappresenta lo stato stabile e documentato prima di qualsiasi attività di test.
-Tutti gli snapshot sono elencati in dettaglio nel file `vm_snapshots.md`, che riporta anche hash e note tecniche specifiche.  
-Questi snapshot costituiscono la **baseline verificabile** del laboratorio e possono essere ripristinati in qualsiasi momento per garantire l’integrità e la ripetibilità dei test.
-
----
-
-## 2.5 Ricognizione — scansione iniziale (stato attuale)
-
-**Data esecuzione:** 2025-10-18  
-**Scopo:** identificare host attivi, porte aperte e servizi/versioni esposti sulla rete host-only del laboratorio.  
-**Nota sui log di rete:** non è stata catturata una pcap in questa fase; tutti gli output prodotti dagli strumenti sono salvati nella cartella `scans/` del repository.
-
-### Comandi eseguiti (principali)
-- Scansione TCP+service/version detection: `nmap -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.106/24`
-- Scansioni mirate web / vulnerabilità: 
-  - `nikto -h http://192.168.56.106 -o scans/nikto_web-target-1.txt`
-  - `nuclei -l target.txt -o scans/nuclei_results.txt`
-Il file `target.txt` reperibile nella cartella `scans/` contiene la lista degli indirizzi delle macchine target. 
+## 2.2 Ambiente di Laboratorio
+La valutazione è stata condotta dal sistema attaccante (Kali Linux) sulla rete Host-Only `vboxnet0`.
+Il laboratorio è composto dai seguenti assetts:
 
 
-### File prodotti e posizione
-Tutti i file prodotti dalla ricognizione sono commitati nella repo sotto `scans/`:
-- `scans/initial_scan.xml` — output XML Nmap (importabile).
-- `scans/initial_scan.nmap` — output Nmap leggibile.
-- `scans/initial_scan.gnmap` — output grezzo per parsing.
-- `scans/nikto_web-target-1.txt` — output Nikto.
-- `scans/nuclei_results.txt` — output nuclei.
+| Ruolo | Sistema Operativo | Applicazione / Impiego | Indirizzo IP |
+|-------|-------------------|------------------------|--------------|
+| Attaccante | Kali Linux | N/A | 192.168.56.104 |
+| Target 1 | Metasploitable2 | Server Multi-Servizio | 192.168.56.105 |
+| Target 2 | Ubuntu Server | Web Application Testing (DVWA) | 192.168.56.106 |
+| Host | Fedora 42 (VirtualBox) | N/A | N/A |
 
-### Sintesi operativa (come leggere i risultati)
-- Usare l'XML (`scans/initial_scan.xml`) per import in Metasploit o per analisi automatica.  
-- Usare `scans/initial_scan.nmap` per una lettura rapida dei servizi e delle versioni.  
-- I risultati principali (host attivi, porte aperte, servizi e versioni) sono stati sintetizzati in `findings/initial_enumeration.md`.
+## 2.3 Metodologia e strumenti
+L'approccio utilizzato è di tipo Black-Box (senza conoscenze preliminari sull'infrastruttura interna, se non la gamma IP).
+I passi eseguiti sono i seguenti:
 
+| Fase | Strumenti utilizzati | Scopo |
+|------|----------------------|-------|
+| Discovery | nmap | Rilevmento di host, porte aperte e identificazione dei servizi/versioni |
+| Scanning | Nuclei, nikto | Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
+| Analysis | Manuale, CVSS v3.1 | Classificazione del rischio e analidi dei risultati |
 
----
+### 2.3.1 Discovery
+La fase di discovery è stata condotta tramite l'utilizzo del tool nmap sull'intera subnet configurata nel laboratorio (192.168.56.1/24). 
+Per la fase di discovery è stato eseguito il seguente comando:
 
-# ✅ Stato attuale
+```Bash
+nmap -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.1/24
+```
 
-- Ambiente configurato e operativo  
-- Snapshot iniziali completati e documentati
-- Report in fase di completamento per la sezione tecnica (“Details”)  
-- Nessuna attività di scanning ancora eseguita
+Il risultato di tale comando è consultabile in `scans/nmap/initial_scan.*` in formato RAW (`.nmap`), XML e greppable (`.gnmap`). 
 
----
+`Nmap` ha trovato 5 host attivi all'interno della subnet:
+- 192.168.56.1 (il default gateway configurato da VirtualBox)
+- 192.168.56.100 (server DHCP configurato da VirtualBox)
+- 192.168.56.105 (Metasploitable2)
+- 192.168.56.106 (Ubuntu Server)
+- 192.168.56.104 (Kali Linux)
 
+Successivamente, la fase di scansione automatizzata è stata eseguita tramite i tools `Nuclei` e `Nikto`, rispettivamente con i seguenti comandi:
 
+```Bash
+nuclei -l target.txt -o scans/nuclei_results.txt
+nikto -h http://192.168.56.106 -o scans/nikto_web-target-1.txt
+```
+*Nota: il file target.txt è consultabile nella directory `scans/target.txt`. Contiene gli indirizzi IP dei target che si vuole scansionare*
+
+I risultati delle scansioni sono consultabili rispettivamente nei file `scans/nuclei_results.txt` e `scans/nikto_results.txt`. 
