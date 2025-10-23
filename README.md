@@ -1,73 +1,79 @@
-# Vulnerability Assessment Lab Project
+# 🛡️ Vulnerability Assessment e Hardening su Laboratorio Multi-Target
 
-Questo repository documenta il progetto personale di **Vulnerability Assessment** svolto in ambiente controllato, con l’obiettivo di analizzare, testare e documentare la sicurezza di un insieme di macchine virtuali configurate appositamente per simulare un’infrastruttura di rete reale.
-
-Il progetto è stato interamente eseguito in ambiente locale, senza alcun collegamento o impatto su sistemi esterni.  
-Tutte le attività — scansioni, test di vulnerabilità e simulazioni di exploit — sono state svolte **in modo etico**, nel rispetto delle buone pratiche di sicurezza informatica e con macchine di mia esclusiva proprietà o configurate a fini didattici.
+> **Stato del Progetto:** In Corso (Fase: Scansione Avanzata e Testing Controllato)
+> **Output Principale:** [report/VA_Report_Final.pdf] (In fase di completamento)
 
 ---
 
-## 🎯 Obiettivi del progetto
+## 🎯 Panoramica del Progetto
 
-- Creare un **laboratorio virtuale** completo per lo studio di tecniche di scanning e penetration testing.  
-- Documentare le fasi di **ricognizione, analisi e testing** di sicurezza delle VM.  
-- Produrre **evidenze verificabili** (snapshot, log, report di scansione) che dimostrino l’attività svolta.  
-- Mantenere una **tracciabilità chiara** del lavoro attraverso commit descrittivi e versionamento dei file chiave.
+Questo repository documenta un progetto di **Vulnerability Assessment (VA)** completo, condotto su un laboratorio virtuale isolato. L'obiettivo è dimostrare competenze tecniche nell'identificazione, classificazione del rischio (tramite CVSS) e proposta di mitigazioni per vulnerabilità di rete e applicative.
 
----
+Il progetto adotta un approccio **evidence-based**, in linea con le metodologie di sicurezza professionali (es. OWASP WSTG), garantendo la tracciabilità e la riproducibilità di ogni fase.
 
-## ⚙️ Ambiente di lavoro
+### Obiettivi Chiave
 
-- **Hypervisor:** VirtualBox  
-- **VM principali:** Kali Linux (attaccante), Metasploitable 2, Ubuntu server + DVWA  
-- **Rete:** configurazione Host-Only + NAT, isolata dal traffico reale  
-- **Strumenti principali:** Nmap, Nikto, Metasploit Framework, Wireshark, tcpdump, nuclei  
-
-Tutti i sistemi sono stati inizialmente salvati come snapshot “golden”, documentati nel file `vm_snapshots.md`.
+* Eseguire una **ricognizione di rete e applicativa** approfondita (Black-Box).
+* Identificare, classificare (CVSS) e documentare le vulnerabilità (inclusi zero-day noti e configurazioni errate).
+* Produrre un **Report Tecnico-Esecutivo** (PDF) che trasformi i risultati tecnici in raccomandazioni attuabili.
+* Creare una **base di conoscenza** per futuri progetti di Penetration Testing e Hardening.
 
 ---
 
-## 🧾 Metodo di lavoro
+## 🚨 Risultati Preliminari (Fase 1: Discovery)
 
-1. **Configurazione e snapshot iniziali**  
-   Ogni VM viene preparata, configurata e salvata come snapshot di riferimento.
+Le scansioni iniziali hanno rivelato una **postura di sicurezza Critica** sui target, a causa dell'uso di software obsoleto e di configurazioni di default note.
 
-2. **Scansione e enumerazione**  
-   Vengono eseguite scansioni di rete (TCP/UDP) per identificare host, servizi e versioni.
+| Target | IP | Tipo di Rischio Principale | Servizi Critici Esposti |
+| :--- | :--- | :--- | :--- |
+| **Metasploitable 2** | `192.168.56.105` | Software Legacy / Credenziali di Default | Tomcat AJP (8009), PostgreSQL (5432), Telnet (23), FTP (21) |
+| **Ubuntu + DVWA** | `192.168.56.106` | Configurazioni Errate / Web Application Flaws | Apache httpd 2.4.58 (80) |
 
-3. **Analisi vulnerabilità**  
-   Si applicano strumenti di assessment (Nmap NSE, Nikto, nuclei) per individuare potenziali CVE.
+**Evidenze di Alto Rischio già rilevate:**
 
-4. **Testing controllato**  
-   Eventuali exploit o tentativi di privilege escalation vengono condotti in ambiente isolato.
-
-5. **Documentazione**  
-   Tutte le prove vengono registrate in file testuali o screenshot, con commit dedicati che ne riportano la data e la finalità.
+* Presenza di una vulnerabilità Critica su Tomcat AJP (**CVE-2020-1938 - Ghostcat**) sulla porta 8009.
+* Credenziali di default esposte sul database PostgreSQL (es. `postgres:postgres`), che permettono la lettura di file di sistema.
+* Directory Indexing abilitato sul Web Server DVWA.
 
 ---
 
-## 🧱 Filosofia del repository
+## ⚙️ Ambiente e Strumenti
 
-Questa repository non è pensata per la riproduzione integrale del laboratorio, ma come **documentazione verificabile** del percorso tecnico svolto.  
-Ogni commit rappresenta un’azione concreta — una scansione, una modifica, un’analisi o un report — e serve a fornire **traccia cronologica e trasparente** dell’evoluzione del progetto.
+### Architettura di Laboratorio
+
+L'infrastruttura è costruita su **VirtualBox** con un host **Fedora Linux** e una rete **Host-Only** isolata (`vboxnet0`). Tutte le VM sono state inizializzate con snapshot "Golden Baseline".
+
+| Ruolo | VM/SO | Rete | Note |
+| :--- | :--- | :--- | :--- |
+| **Attaccante** | Kali Linux | Host-Only | Piattaforma di testing principale. |
+| **Target 1** | Metasploitable 2 (Linux 2.6.24) | Host-Only | Target deliberatamente vulnerabile. |
+| **Target 2** | Ubuntu Server + DVWA | Host-Only | Target Web Application Testing. |
+
+Informazioni in merito agli assets sono disponibili in `docs/host_info.md` e `docs/vm_info.md`
+
+### Tool di Lavoro
+
+| Fase | Tool Utilizzati (Finora) | Tool in Programma |
+| :--- | :--- | :--- |
+| **Discovery/Enum** | **Nmap** | **Nmap (Script Avanzati)** |
+| **Vulnerability/PoC** | N/A | CLI (psql, ftp, ssh), Metasploit Framework, **OWASP ZAP** (Web App Scanning), **Burp Suite** (Manual Testing) |
 
 ---
 
-## 📅 Stato del progetto
+## 📁 Struttura della Repository
 
-- ✅ Configurazione ambiente completata  
-- ✅ Snapshot iniziali registrati (`vm_snapshots.md`) 
-- ✅ Scansioni di rete iniziali (fase di ricognizione) -> risultati in `scans/` e `findings/`
-- 🔜 Scansioni NSE mirate, snapshot checkpoint prima di test intrusivi (stato attuale)
+La repository è strutturata per riflettere le fasi del progetto:
+
+* **`report/`**: Contiene il report finale (PDF/DOCX) con la classificazione CVSS e le raccomandazioni.
+* **`scans/`**: Log non elaborati e output grezzi da Nmap, Nikto, nuclei, e altri tools di scan.
+* **`docs/`**: Informazioni di background sull'ambiente.
+* **`findings/`**: Analisi dettagliata delle evidenze ottenute in ciascuna fase
 
 ---
 
 ## 🔒 Disclaimer
 
-Tutte le attività descritte sono state realizzate **esclusivamente a fini didattici e di ricerca** su sistemi controllati.  
-Non è stato in alcun modo coinvolto o testato alcun sistema di rete esterno o appartenente a terzi.
+Tutte le attività di scansione e test sono state realizzate **esclusivamente a fini didattici e di ricerca** su sistemi controllati (di proprietà). Nessun sistema esterno o di terzi è stato coinvolto.
 
----
-
-© 2025 – Progetto di Vulnerability Assessment  
-Autore: Mattia Cavaliere
+*Autore: Mattia Cavaliere*
+*Licenza: [MIT License]*

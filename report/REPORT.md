@@ -1,18 +1,19 @@
+Data inizio VA: 15 Ottobre 2025
 Data di Redazione: 22 Ottobre 2025  
 Autore: Mattia Cavaliere  
-Ambito di Valutazione: Network & Web Application Security (Black-Box)  
-Target: Metasploitable 2 e Ubuntu Server + DVWA  
+Ambito di Valutazione: Network & Web Application Security   
+Target: Metasploitable 2 (T.01) e Ubuntu Server + DVWA (T.02)  
 
 # 1. Executive Summary
 Il presente report documenta i risultati di un'attività di Vulnerability Assessment (VA) condotta su un laboratorio virtuale interno, composto da due macchine target deliberatamente vulnerabili, al fine di dimostrare competenza tecnica in ricognizione, analisi del rischio e mitigazione.
 
-L'analisi preliminare ha rivelato una postura di sicurezza Estremamente Critica su entrambi i sistemi. Sono state identificate un totale di 11 vulnerabilità significative (rischio Alto o Critico), di cui 2 classificate come CRITICHE. Le criticità sono principalmente dovute all'utilizzo di software obsoleto (Metasploitable 2) e configurazioni di default insicure (DVWA).
+L'analisi preliminare ha rivelato una postura di sicurezza Estremamente Critica su entrambi i sistemi. Sono state identificate un totale di 11 vulnerabilità significative (rischio Alto o Critico), di cui 2 classificate come CRITICHE. Le criticità sono principalmente dovute all'utilizzo di software obsoleto (T.01) e configurazioni di default insicure (T.02).
 
 Le vulnerabilità più gravi permettono a un attaccante non autenticato:
-1. Accesso a file di sistema e potenziale RCE (Remote Code Execution) su Metasploitable 2.
-2. Completa compromissione del database tramite credenziali di default.
+1. Accesso a file di sistema e potenziale RCE (Remote Code Execution) su T.01.
+2. Completa compromissione del database tramite credenziali di default T.02.
 
-Raccomandazione Immediata: Si raccomanda di procedere immediatamente alla verifica e mitigazione delle vulnerabilità Critiche e Alte, in particolare quelle relative ai servizi esposti su Metasploitable 2.
+Raccomandazione Immediata: Si raccomanda di procedere immediatamente alla verifica e mitigazione delle vulnerabilità Critiche e Alte, in particolare quelle relative ai servizi esposti su T.01 tramite aggiornamento software dei servizi offerti da T.01.
 
 # 2. Overview e Metodologia
 ## 2.1 Scopo e Obiettivi
@@ -23,12 +24,12 @@ La valutazione è stata condotta dal sistema attaccante (Kali Linux) sulla rete 
 Il laboratorio è composto dai seguenti assetts:
 
 
-| Ruolo | Sistema Operativo | Applicazione / Impiego | Indirizzo IP |
-|-------|-------------------|------------------------|--------------|
-| Attaccante | Kali Linux | N/A | 192.168.56.104 |
-| Target 1 | Metasploitable2 | Server Multi-Servizio | 192.168.56.105 |
-| Target 2 | Ubuntu Server | Web Application Testing (DVWA) | 192.168.56.106 |
-| Host | Fedora 42 (VirtualBox) | N/A | N/A |
+| Ruolo | Sistema Operativo | Applicazione / Impiego | Indirizzo IP | Identificativo |
+|-------|-------------------|------------------------|--------------|----------------|
+| Attaccante | Kali Linux | N/A | 192.168.56.104 | A.01 |
+| Target 1 | Metasploitable2 | Server Multi-Servizio | 192.168.56.105 | T.01 |
+| Target 2 | Ubuntu Server | Web Application Testing (DVWA) | 192.168.56.106 | T.02 |
+| Host | Fedora 42 (VirtualBox) | N/A | N/A | N/A |
 
 ## 2.3 Metodologia e strumenti
 L'approccio utilizzato è di tipo Black-Box (senza conoscenze preliminari sull'infrastruttura interna, se non la gamma IP).
@@ -36,8 +37,8 @@ I passi eseguiti sono i seguenti:
 
 | Fase | Strumenti utilizzati | Scopo |
 |------|----------------------|-------|
-| Discovery | nmap | Rilevmento di host, porte aperte e identificazione dei servizi/versioni |
-| Scanning | Nuclei, nikto | Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
+| Discovery | nmap v7.95| Rilevmento di host, porte aperte e identificazione dei servizi/versioni |
+| Scanning | Nuclei v3.4.10, Nikto 2.5.0| Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
 | Analysis | Manuale, CVSS v3.1 | Classificazione del rischio e analidi dei risultati |
 
 ### 2.3.1 Discovery
@@ -53,9 +54,9 @@ Il risultato di tale comando è consultabile in `scans/nmap/initial_scan.*` in f
 `Nmap` ha trovato 5 host attivi all'interno della subnet:
 - 192.168.56.1 (il default gateway configurato da VirtualBox)
 - 192.168.56.100 (server DHCP configurato da VirtualBox)
-- 192.168.56.105 (Metasploitable2)
-- 192.168.56.106 (Ubuntu Server)
-- 192.168.56.104 (Kali Linux)
+- 192.168.56.105 (T.01)
+- 192.168.56.106 (T.02)
+- 192.168.56.104 (A.01)
 
 ### 2.3.2 Scanning
 Successivamente, la fase di scansione automatizzata è stata eseguita tramite i tools `Nuclei` e `Nikto`, rispettivamente con i seguenti comandi:
