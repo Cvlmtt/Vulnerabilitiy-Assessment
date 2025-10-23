@@ -1,4 +1,4 @@
-# Nmap 7.95 scan initiated Sat Oct 18 08:07:06 2025 as: /usr/lib/nmap/nmap --privileged -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.1/24
+# Nmap 7.95 scan initiated Sat Oct 18 08:07:06 2025 as: /usr/lib/nmap/nmap --privileged -Pn -sS -sV -O -T4 --reason -oA scans/discovery 192.168.56.1/24
 Host: 192.168.56.1 ()	Status: Up
 Host: 192.168.56.1 ()	Ports: 
 Host: 192.168.56.100 ()	Status: Up

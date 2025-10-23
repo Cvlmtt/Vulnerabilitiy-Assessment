@@ -46,10 +46,10 @@ La fase di discovery è stata condotta tramite l'utilizzo del tool nmap sull'int
 Per la fase di discovery è stato eseguito il seguente comando:
 
 ```Bash
-nmap -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.1/24
+nmap -Pn -sS -sV -O -T4 --reason -oA scans/discovery 192.168.56.1/24
 ```
 
-Il risultato di tale comando è consultabile in `scans/nmap/initial_scan.*` in formato RAW (`.nmap`), XML e greppable (`.gnmap`). 
+Il risultato di tale comando è consultabile in `scans/nmap/discovery.*` in formato RAW (`.nmap`), XML e greppable (`.gnmap`). 
 
 `Nmap` ha trovato 5 host attivi all'interno della subnet:
 - 192.168.56.1 (il default gateway configurato da VirtualBox)

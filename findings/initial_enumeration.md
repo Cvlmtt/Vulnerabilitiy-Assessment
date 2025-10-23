@@ -1,8 +1,8 @@
 # Findings — Initial Enumeration
 
-**Scansione eseguita:** `nmap -Pn -sS -sV -O -T4 -oA --reason scans/initial_scan 192.168.56.1/24`  
+**Scansione eseguita:** `nmap -Pn -sS -sV -O -T4 -oA --reason scans/discovery 192.168.56.1/24`  
 **Data esecuzione:** 2025-10-18  
-**File di riferimento:** `scans/initial_scan.nmap`, `scans/initial_scan.xml`, `scans/initial_scan.gnmap`.  
+**File di riferimento:** `scans/discovery.nmap`, `scans/discovery.xml`, `scans/discovery.gnmap`.  
 
 ---
 
@@ -11,7 +11,7 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei c
 
 ---
 
-## 2. Tabella sintetica degli host (dati estratti da `scans/initial_scan.nmap`)
+## 2. Tabella sintetica degli host (dati estratti da `scans/discovery.nmap`)
 
 | IP | Hostname (se presente) | Porte / Servizi principali | OS / note di fingerprint |
 |-----|------------------------|---------------------------------------|--------------------------|
@@ -23,7 +23,7 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei c
 ---
 
 ## 3. Dettaglio host — 192.168.56.105
-**File di riferimento:** `scans/initial_scan.nmap`.
+**File di riferimento:** `scans/discovery.nmap`.
 
 **Servizi:**
 - 21/tcp open — vsftpd 2.3.4  
@@ -52,7 +52,7 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei c
 
 ## 4. Dettaglio host — 192.168.56.106 (web server Apache)
 
-**File di riferimento:** `scans/initial_scan.nmap`.
+**File di riferimento:** `scans/discovery.nmap`.
 
 **Servizi:**
 - 80/tcp open — Apache httpd 2.4.58
@@ -66,17 +66,17 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei c
 - `192.168.56.100` — tutte le porte filtered; MAC `08:00:27:A0:92:4B` (VirtualBox NIC). Probabile VM guest non esposta o con firewall che filtra le porte.
 - `192.168.56.104` — tutte le porte chiuse; Network Distance: 0 hops (probabile entry locale/host). Fingerprint non univoco.
 
-(Estratti completi nel file `scans/initial_scan.nmap`).
+(Estratti completi nel file `scans/discovery.nmap`).
 
 ---
 
 ## 6. Riferimenti evidenza
-- `scans/initial_scan.nmap` — output Nmap (raw).  
-- `scans/initial_scan.xml` — XML Nmap per analisi strutturata.  
+- `scans/discovery.nmap` — output Nmap (raw).  
+- `scans/discovery.xml` — XML Nmap per analisi strutturata.  
 
 ---
 
 ## 7. Note finali sul contenuto del file
-Questo documento riassume fedelmente le informazioni ricavate dall'output `scans/initial_scan.nmap`. Per consultare le singole righe raw e i dettagli dei template trovati, aprire i file indicati nella cartella `scans/`.
+Questo documento riassume fedelmente le informazioni ricavate dall'output `scans/discovery.nmap`. Per consultare le singole righe raw e i dettagli dei template trovati, aprire i file indicati nella cartella `scans/`.
 
 ---

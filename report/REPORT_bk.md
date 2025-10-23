@@ -77,7 +77,7 @@ Questi snapshot costituiscono la **baseline verificabile** del laboratorio e pos
 **Nota sui log di rete:** non è stata catturata una pcap in questa fase; tutti gli output prodotti dagli strumenti sono salvati nella cartella `scans/` del repository.
 
 ### Comandi eseguiti (principali)
-- Scansione TCP+service/version detection: `nmap -Pn -sS -sV -O -T4 --reason -oA scans/initial_scan 192.168.56.106/24`
+- Scansione TCP+service/version detection: `nmap -Pn -sS -sV -O -T4 --reason -oA scans/discovery 192.168.56.106/24`
 - Scansioni mirate web / vulnerabilità: 
   - `nikto -h http://192.168.56.106 -o scans/nikto_web-target-1.txt`
   - `nuclei -l target.txt -o scans/nuclei_results.txt`
@@ -86,15 +86,15 @@ Il file `target.txt` reperibile nella cartella `scans/` contiene la lista degli 
 
 ### File prodotti e posizione
 Tutti i file prodotti dalla ricognizione sono commitati nella repo sotto `scans/`:
-- `scans/initial_scan.xml` — output XML Nmap (importabile).
-- `scans/initial_scan.nmap` — output Nmap leggibile.
-- `scans/initial_scan.gnmap` — output grezzo per parsing.
+- `scans/discovery.xml` — output XML Nmap (importabile).
+- `scans/discovery.nmap` — output Nmap leggibile.
+- `scans/discovery.gnmap` — output grezzo per parsing.
 - `scans/nikto_web-target-1.txt` — output Nikto.
 - `scans/nuclei_results.txt` — output nuclei.
 
 ### Sintesi operativa (come leggere i risultati)
-- Usare l'XML (`scans/initial_scan.xml`) per import in Metasploit o per analisi automatica.  
-- Usare `scans/initial_scan.nmap` per una lettura rapida dei servizi e delle versioni.  
+- Usare l'XML (`scans/discovery.xml`) per import in Metasploit o per analisi automatica.  
+- Usare `scans/discovery.nmap` per una lettura rapida dei servizi e delle versioni.  
 - I risultati principali (host attivi, porte aperte, servizi e versioni) sono stati sintetizzati in `findings/initial_enumeration.md`.
 
 
