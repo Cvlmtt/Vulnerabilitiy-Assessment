@@ -38,7 +38,7 @@ I passi eseguiti sono i seguenti:
 | Fase | Strumenti utilizzati | Scopo |
 |------|----------------------|-------|
 | Discovery | nmap v7.95| Rilevmento di host, porte aperte e identificazione dei servizi/versioni |
-| Scanning | Nuclei v3.4.10, Nikto 2.5.0| Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
+| Scanning | nmpa script `vulners`, `vuln`| Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
 | Analysis | Manuale, CVSS v3.1 | Classificazione del rischio e analidi dei risultati |
 
 ### 2.3.1 Discovery
