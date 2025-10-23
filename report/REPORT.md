@@ -59,3 +59,8 @@ Il risultato di tale comando è consultabile in `scans/nmap/discovery.*` in form
 - 192.168.56.104 (A.01)
 
 ### 2.3.2 Scanning
+La fase di scanning è stata divisa in due parti:
+1. **Scanning avanzato (T.01 - 192.168.56.105)**: scan eseguito con scripts `nmap` (`vulners` e `vuln`). I risultati hanno rivelato la presenza di 3 vulnerabilità RCE (Remote Code Execution) classificate come critiche in base a CVSS. Il triage dettagliato è disponibile in `findings/T01_advanced_triage.md`
+2. **Scanning applicativo (T.02 - 192.168.56.106)**: In attesa di esecuzione
+
+# 3. Sintesi dei Risultati

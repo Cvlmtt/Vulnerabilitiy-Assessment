@@ -26,14 +26,14 @@ Le scansioni iniziali hanno rivelato una **postura di sicurezza Critica** sui ta
 
 | Target | IP | Tipo di Rischio Principale | Servizi Critici Esposti |
 | :--- | :--- | :--- | :--- |
-| **Metasploitable 2** | `192.168.56.105` | Software Legacy / Credenziali di Default | Tomcat AJP (8009), PostgreSQL (5432), Telnet (23), FTP (21) |
-| **Ubuntu + DVWA** | `192.168.56.106` | Configurazioni Errate / Web Application Flaws | Apache httpd 2.4.58 (80) |
+| **Metasploitable 2 (T.01)** | `192.168.56.105` | Vulnerabilità che consentono Remote Code Execution | VsFTPd, java-rmi, bindshell, UnrealIRCd |
+| **Ubuntu + DVWA (T.02)** | `192.168.56.106` | (Analisi ancora da effettuare) |(Analisi ancora da effettuare) | 
 
 **Evidenze di Alto Rischio già rilevate:**
 
-* Presenza di una vulnerabilità Critica su Tomcat AJP (**CVE-2020-1938 - Ghostcat**) sulla porta 8009.
-* Credenziali di default esposte sul database PostgreSQL (es. `postgres:postgres`), che permettono la lettura di file di sistema.
-* Directory Indexing abilitato sul Web Server DVWA.
+- **Backdoor vsFTPd (CVE-2011-2523)**: dimostrata RCE con privilegi di root
+- **RMI Registry RCE (CVE-2020-9761)**: configurazione di default che permette RCE
+- **Bindshell**: configurazione insicura di una bindshell con permessi di root in ascolto  
 
 ---
 
@@ -55,7 +55,7 @@ Informazioni in merito agli assets sono disponibili in `docs/host_info.md` e `do
 
 | Fase | Tool Utilizzati (Finora) | Tool in Programma |
 | :--- | :--- | :--- |
-| **Discovery/Enum** | **Nmap** | **Nmap (Script Avanzati)** |
+| **Discovery/Enum** | **Nmap**,**Nmap (Script Avanzati)** | N/A |
 | **Vulnerability/PoC** | N/A | CLI (psql, ftp, ssh), Metasploit Framework, **OWASP ZAP** (Web App Scanning), **Burp Suite** (Manual Testing) |
 
 ---
