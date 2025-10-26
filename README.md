@@ -20,6 +20,20 @@ Il progetto adotta un approccio **evidence-based**, in linea con le metodologie 
 
 ---
 
+| Fase | Step Dettagliato | Target(s) | Strumenti | Stato |
+|------|------------------|-----------|-----------|-------|
+| Preparazione | Allestimento laboratorio e Snapshot | Tutti | VirtualBox | ✅ Eseguito |
+| Discovery & Enumeration | Scansione Iniziale | Tutti | Nmap | ✅ Eseguito |
+| Vulnerability Scanning | Scanning Avanzato Servizi (CVE Mapping) | T.01 | Nmap --script=vulners,vuln | ✅ Eseguito |
+|  | Scansione Approfondita (Web/Host) | T.02 | Nikto, Nuclei | 🟠 In Coda |
+|  | Scansione con Vulnerability Scanner Commerciale (OpenVAS) | T.01, T.02 | OpenVAS / Greenbone | 🟠 In Coda |
+| Triage & Risk Classification | Analisi e Correzione del Report (Aggiornamento Matrice di Rischio e Triage) | T.01, T.02 | Analisi Manuale, CVSS | ⏳ In Corso (T.01 Fatto) |
+| Verification (Proof-of-Concept - PoC) | PoC Accesso Critico/Alto (RCE su vsFTPd, Bindshell, Credenziali DB) | T.01 | Metasploit, Telnet/Netcat | ❌ Non Eseguito |
+|  | PoC Applicativo Web (SQL Injection, XSS su DVWA) | T.02 | OWASP ZAP, Burp Suite, SQLMap | ❌ Non Eseguito|
+| Reporting & Remediation | Finalizzazione del Report Tecnico/Esecutivo e Proposta di Mitigazioni | N/A | Documentazione | ❌ Non Eseguito |
+
+---
+
 ## ⚙️ Ambiente e Strumenti
 
 ### Architettura di Laboratorio
