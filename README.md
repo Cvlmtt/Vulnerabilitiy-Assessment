@@ -16,24 +16,7 @@ Il progetto adotta un approccio **evidence-based**, in linea con le metodologie 
 * Eseguire una **ricognizione di rete e applicativa** approfondita (Black-Box).
 * Identificare, classificare (CVSS) e documentare le vulnerabilità (inclusi zero-day noti e configurazioni errate).
 * Produrre un **Report Tecnico-Esecutivo** (PDF) che trasformi i risultati tecnici in raccomandazioni attuabili.
-* Creare una **base di conoscenza** per futuri progetti di Penetration Testing e Hardening.
-
----
-
-## 🚨 Risultati Preliminari (Fase 1: Discovery)
-
-Le scansioni iniziali hanno rivelato una **postura di sicurezza Critica** sui target, a causa dell'uso di software obsoleto e di configurazioni di default note.
-
-| Target | IP | Tipo di Rischio Principale | Servizi Critici Esposti |
-| :--- | :--- | :--- | :--- |
-| **Metasploitable 2 (T.01)** | `192.168.56.105` | Vulnerabilità che consentono Remote Code Execution | VsFTPd, java-rmi, bindshell, UnrealIRCd |
-| **Ubuntu + DVWA (T.02)** | `192.168.56.106` | (Analisi ancora da effettuare) |(Analisi ancora da effettuare) | 
-
-**Evidenze di Alto Rischio già rilevate:**
-
-- **Backdoor vsFTPd (CVE-2011-2523)**: dimostrata RCE con privilegi di root
-- **RMI Registry RCE (CVE-2020-9761)**: configurazione di default che permette RCE
-- **Bindshell**: configurazione insicura di una bindshell con permessi di root in ascolto  
+* Creare una **base di conoscenza** per futuri progetti di Penetration Testing, oltre che migliorare e ampliare la conoscenza di tools tecnici per attività di VA e PT.
 
 ---
 
@@ -51,12 +34,31 @@ L'infrastruttura è costruita su **VirtualBox** con un host **Fedora Linux** e u
 
 Informazioni in merito agli assets sono disponibili in `docs/host_info.md` e `docs/vm_info.md`
 
+---
+
 ### Tool di Lavoro
 
 | Fase | Tool Utilizzati (Finora) | Tool in Programma |
 | :--- | :--- | :--- |
-| **Discovery/Enum** | **Nmap**,**Nmap (Script Avanzati)** | N/A |
-| **Vulnerability/PoC** | N/A | CLI (psql, ftp, ssh), Metasploit Framework, **OWASP ZAP** (Web App Scanning), **Burp Suite** (Manual Testing) |
+| **Discovery/Enum** | **Nmap**,**Nmap (Script Avanzati)** | OpenVAs |
+| **Vulnerability/PoC** | N/A | Metasploit Framework, **OWASP ZAP** (Web App Scanning), **Burp Suite** (Manual Testing) |
+
+--- 
+
+## 🚨 Risultati Preliminari (Fase 1: Discovery)
+
+Le scansioni iniziali hanno rivelato una **postura di sicurezza Critica** sui target, a causa dell'uso di software obsoleto e di configurazioni di default note.
+
+| Target | IP | Tipo di Rischio Principale | Servizi Critici Esposti |
+| :--- | :--- | :--- | :--- |
+| **Metasploitable 2 (T.01)** | `192.168.56.105` | Vulnerabilità che consentono Remote Code Execution | VsFTPd, java-rmi, bindshell, UnrealIRCd |
+| **Ubuntu + DVWA (T.02)** | `192.168.56.106` | (Analisi ancora da effettuare) |(Analisi ancora da effettuare) | 
+
+**Evidenze di Alto Rischio già rilevate:**
+
+- **Backdoor vsFTPd (CVE-2011-2523)**: dimostrata RCE con privilegi di root
+- **RMI Registry RCE (CVE-2020-9761)**: configurazione di default che permette RCE
+- **Bindshell**: configurazione insicura di una bindshell con permessi di root in ascolto  
 
 ---
 
