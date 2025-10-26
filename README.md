@@ -20,6 +20,8 @@ Il progetto adotta un approccio **evidence-based**, in linea con le metodologie 
 
 ---
 
+## Stato del Progetto
+
 | Fase | Step Dettagliato | Target(s) | Strumenti | Stato |
 |------|------------------|-----------|-----------|-------|
 | Preparazione | Allestimento laboratorio e Snapshot | Tutti | VirtualBox | ✅ Eseguito |
