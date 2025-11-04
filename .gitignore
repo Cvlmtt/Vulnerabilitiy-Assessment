@@ -3,3 +3,5 @@ evidence/
 *.pem
 *.pcap
 *.key
+.gemini/
+gha-creds-*.json
