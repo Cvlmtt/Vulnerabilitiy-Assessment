@@ -28,8 +28,8 @@ Il progetto adotta un approccio **evidence-based**, in linea con le metodologie 
 | Discovery & Enumeration | Scansione Iniziale | Tutti | Nmap | ✅ Eseguito |
 | Vulnerability Scanning | Scanning Avanzato Servizi (CVE Mapping) | T.01 | Nmap --script=vulners,vuln | ✅ Eseguito |
 |  | Scansione Approfondita (Web/Host) | T.02 | Nikto, Nuclei | ✅ Eseguito |
-|  | Scansione con Vulnerability Scanner Commerciale (OpenVAS) | T.01, T.02 | OpenVAS / Greenbone | 🟠 In Coda |
-|  | Dynamic Application Security Testing (DAST) | T.02 | OWASP ZAP | 🟠 In Coda | 
+|  | Scansione con Vulnerability Scanner Commerciale (OpenVAS) | T.01, T.02 | OpenVAS / Greenbone | ✅ Eseguito |
+|  | Dynamic Application Security Testing (DAST) | T.02 | OWASP ZAP | ✅ Eseguito | 
 | Triage & Risk Class | Triage Risultati T.01 | T.01 | Analisi Manuale | ✅ Eseguito |
 |  | Triage Risultati T.02 (Classificazione Nikto/Nuclei/ZAP) | T.02 | "Analisi Manuale, CVSS" | 🟠 In Coda | 
 |  | Consolidamento Finale (Aggiornamento Matrice di Rischio) | Tutti | Reportistica | ❌ Non Eseguito |
