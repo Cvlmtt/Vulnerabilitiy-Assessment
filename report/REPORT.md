@@ -38,7 +38,7 @@ I passi eseguiti sono i seguenti:
 | Fase | Strumenti utilizzati | Scopo |
 |------|----------------------|-------|
 | Discovery | nmap v7.95| Rilevmento di host, porte aperte e identificazione dei servizi/versioni |
-| Scanning | nmpa script `vulners`, `vuln`| Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
+| Scanning | nmap script `vulners`, `vuln`, OpenVAS, OWASP ZAP, nikto, nuclei | Scansione automatizzata di vulnerabilità note (CVE) e configurazioni errate (Web) |
 | Analysis | Manuale, CVSS v3.1 | Classificazione del rischio e analidi dei risultati |
 
 ### 2.3.1 Discovery
@@ -60,7 +60,9 @@ Il risultato di tale comando è consultabile in `scans/nmap/discovery.*` in form
 
 ### 2.3.2 Scanning
 La fase di scanning è stata divisa in due parti:
-1. **Scanning avanzato (T.01 - 192.168.56.105)**: scan eseguito con scripts `nmap` (`vulners` e `vuln`). I risultati hanno rivelato la presenza di 3 vulnerabilità RCE (Remote Code Execution) classificate come critiche in base a CVSS. Il triage dettagliato è disponibile in `findings/T01_advanced_triage.md`
-2. **Scanning applicativo (T.02 - 192.168.56.106)**: In attesa di esecuzione
+1. **Scanning avanzato (T.01 - 192.168.56.105)**: scan eseguito con scripts `nmap` (`vulners` e `vuln`) e con OpenVAS. Sono state considerate solo le vulnerabilità di criticità Media, Alta e Critica. Trattandosi di un host volontariamente vulnerabile e datato sono state rilevate 51 vulnerabilità con CVSS $\ge$4. Il triage dettagliato è disponibile in `findings/T01_advanced_triage.md`. 
+> Aggiungere info su scan con OWASP ZAP su T01 se eseguito task di scan
+
+2. **Scanning applicativo (T.02 - 192.168.56.106)**: web scan eseguito utilizzato `nikto` e `nuclei` e scan DAST eseguito con OWASP ZAP. In attesa di triage completo.
 
 # 3. Sintesi dei Risultati
