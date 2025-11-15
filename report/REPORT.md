@@ -59,10 +59,20 @@ Il risultato di tale comando è consultabile in `scans/nmap/discovery.*` in form
 - 192.168.56.104 (A.01)
 
 ### 2.3.2 Scanning
-La fase di scanning è stata divisa in due parti:
-1. **Scanning avanzato (T.01 - 192.168.56.105)**: scan eseguito con scripts `nmap` (`vulners` e `vuln`) e con OpenVAS. Sono state considerate solo le vulnerabilità di criticità Media, Alta e Critica. Trattandosi di un host volontariamente vulnerabile e datato sono state rilevate 51 vulnerabilità con CVSS $\ge$4. Il triage dettagliato è disponibile in `findings/T01_advanced_triage.md`. 
-> Aggiungere info su scan con OWASP ZAP su T01 se eseguito task di scan
+| Strumento | Target | Tipo di Analisi | Obiettivo | 
+|-----------|--------|-----------------|-----------|
+| **Nmap scripts** | T.01 | Versione/Scripting | Fingerprinting dei servizi, rilevamento porte e identificazione di CVE ad alto impatto (tramite script `vuln` e `vulners`). Fornisce la baseline di rischio di rete |
+| **Nikto** | T.01, T.02 | Scanning Web | Rilevamento di misconfigurazioni del web server, file esposti, e vulnerabilità di web server hygiene (Header, TRACE, Directory Indexing). Mappa la superficie di Attacco e identifica i punti deboli di configurazione del server (Apache/Tomcat) |
+| **Nuclei** | T.01, T.02 | Scanning Web | Testing rapido e mirato di CVE specifiche note per le applicazioni Web. Funge da conferma rapida che le applicazioni legacy sono affette da vulnerabilità specifiche note |
+| **OWASP ZAP** | T.02 | DAST (Dynamic App Sec Testing) | Analisi attiva del codice (payload injection) per identificare vulnerabilità di sicurezza applicative (es. SQL Injection, XSS) su T.01 e T.02. Fornisce la prova diretta di code flaw.  |
+| **OpenVAS** | T.01, T.02 | Host/Network Vulnerability | Scansione completa a livello Enterprise per la verifica di patch, configurazioni di host/OS e classificazione del rischio con calcolo CVSS. Funge da validatore finale, confermando i finding degli altri tools e assegnando il punteggio di gravità standardizzato |
 
-2. **Scanning applicativo (T.02 - 192.168.56.106)**: web scan eseguito utilizzato `nikto` e `nuclei` e scan DAST eseguito con OWASP ZAP. In attesa di triage completo.
+Tutti i report generati sono archiviati nella cartella `/scans` per garantire la tracciabilità e la riproducibilità dell'analisi. 
 
-# 3. Sintesi dei Risultati
+# 3. Sintesi dei Risultati e Classificazione del Rischio
+
+# 4. Dettaglio delle Vulnerabilità e Proof-of-Concept (PoC)
+
+# 5. Raccomandazioni di Mitigazione
+
+# 6. Conclusioni e Next Steps
