@@ -47,3 +47,25 @@ Check: testare credenziali comuni o default
 ### Informational
 - SSH Version Disclosure  
 - SSH Auth Methods Enumeration
+
+# Telnet Service (Port 23)
+
+## Vulnerabilità confermate
+
+### 1. Telnet Service Enabled
+Severity: High
+Tool: OpenVAS, Nmap
+Description: Il servizio Telnet trasmette credenziali in chiaro, consentendo attacchi di sniffing e MITM. Inoltre è un protocollo deprecato considerato intrinsecamente insicuro
+Check: Manual
+- Avio telnet e login
+- Sniffing via Wiresharl (tcp.port == 23)
+![Sniffing with Wireshark](img/Sniffing_credential_wireshark.png)
+Impatto: Compromissione totale delle credenziali in rete locale
+
+### 2. Weak/Default Credentials Allowed via Telnet
+Severity: High
+Tool: manual test
+Check: Login with default / known password `msfadmin:msfadmin`
+Impatto: Accesso remoto completo con bruteforce
+![Telnet login](img/Login_telnet.png)
+
