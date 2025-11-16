@@ -6,7 +6,7 @@
 Severity: Critical
 Tool: Nmap, OpenVAS
 Description: versione di vsftpd nota con backdoor che permette l'apertura di una shell remota
-Evidenza:
+Evidence:
 - Nmap: rilevata versione (2.3.4) con backdoor - CVE-2011-2523
 - OpenVAS: Conferma CVE-2011-2523
 Check: confermata manualmente
@@ -69,3 +69,34 @@ Check: Login with default / known password `msfadmin:msfadmin`
 Impatto: Accesso remoto completo con bruteforce
 ![Telnet login](img/Login_telnet.png)
 
+# SMTP Service (Port 25)
+
+## Vulnerabilità confermate
+
+### 1. SATRTTLS Plaintext Command Injection
+Severity: Medium
+Tool: OpenVAS
+Description: L'implementazione STARTTLS è vulnerabile a injection di comandi
+Evidence: CVE-2011-0411, CVE-2011-1430, CVE-2011-1431, CVE-2011-1432, CVE-2011-1506, CVE-2011-1575, CVE-2011-1926, CVE-2011-2165 
+
+### 2. SMTP User Enumeration via VRFY/EXPN
+Severity: Medium
+Tool: OpenVAS
+Description: L'attaccante può enumerare account locali del sistema
+Impatto: Facilita brute-force e attacchi mirati
+Check: 
+![Manual enum on smtp service](img/manual_check_user_enum_smtp.png)
+|[msframework enum on smtp service](img/msframework_enum_smtp.png)
+
+### 3. Weak / Insecure TLS Configuration
+Severity: Medium
+Tool: OpenVAS; Nmap
+Description: Il servizio SMTP accetta molte configurazioni TLS insicure:
+- SSLv2/SSLv3 attivi (POODLE)
+- RSA key < 2048 bit
+- DH group insufficiente, DH anonimo
+- FREAK (RSA_EXPORT)
+- TLSv1.0 / TLSv1.1
+- Certificato debole o scaduto
+- Vulnerabilità Logjam (CVE-2015-4000)
+Impatto: possibili attacchi MITM e downgrade
