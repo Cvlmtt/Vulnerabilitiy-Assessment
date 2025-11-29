@@ -313,3 +313,23 @@ Tool: Nmap, OpenVAS
 Description: La porta 512 espone il servizio rexec/rsh, parte della suite di comandi remoti BSD, che utilizza autenticazione non cifrata e invia credenziali in chiaro sulla rete. Il protocollo è obsoleto e non dovrebbe più essere utilizzato in ambienti moderni.
 CVEs:
 - CVE-1999-0618
+
+# Rlogin (port 513)
+
+## Confirmed Vulnerabilities
+
+### 1. Rlogin Passwordless Login
+Severity: Critical
+Tool: OpenVAS
+Description: La porta 513 espone il servizio rlogin che permette il login con utente root senza l'utilizzo di una password
+Impact: Un attaccante può ottenre l'accesso all'utente root e ai suoi privilegi agevolmente
+Check:
+![Rlogin](img/rlogin.png)
+
+### 2. Rlogin Service Exposed
+Severity: High
+Tool: Nmap, OpenVAS
+Description: La porta 513 espone il servizio rlogin che consente l'accesso remoto all'host con trasmissione di password in chiaro. 
+Impact: Un attaccante può recuperare coppie di nomeutente:password tramite sniffing di rete
+CVEs:
+- CVE-1999-0651
