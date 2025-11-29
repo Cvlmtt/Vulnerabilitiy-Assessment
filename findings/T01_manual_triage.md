@@ -307,4 +307,9 @@ Impact: Un attacco di tipo MITM può intercettare e modificare il traffico SMB t
 
 ## Confirmed Vulnerabilities
 
-### 1. Recex service 
+### 1. Rexec/Rsh Service Exposed
+Severity: High
+Tool: Nmap, OpenVAS
+Description: La porta 512 espone il servizio rexec/rsh, parte della suite di comandi remoti BSD, che utilizza autenticazione non cifrata e invia credenziali in chiaro sulla rete. Il protocollo è obsoleto e non dovrebbe più essere utilizzato in ambienti moderni.
+CVEs:
+- CVE-1999-0618
