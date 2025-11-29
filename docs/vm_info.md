@@ -6,4 +6,3 @@
 |---------|------|------|
 | Kali | Attaccante | Kali GNU/Linux Rolling 2025.3 |
 | Metasploitable2 | Target | Ubuntu 8.04 |
-| Ubuntu Server | Target | Ubuntu 24.04.3 TLS + Linux DVWA 6.8.0-85-generic + PHP version 8.3.6|

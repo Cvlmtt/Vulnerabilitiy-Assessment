@@ -1,24 +1,25 @@
 # Findings — Initial Enumeration
 
-**Scansione eseguita:** `nmap -Pn -sS -sV -O -T4 -oA --reason scans/discovery 192.168.56.1/24`  
+**Scansione eseguita:** `nmap -Pn -sS -sV -O -T4 -oA --reason discovery 192.168.56.1/24`  
 **Data esecuzione:** 2025-10-18  
 **File di riferimento:** `scans/discovery.nmap`, `scans/discovery.xml`, `scans/discovery.gnmap`.  
 
 ---
 
 ## 1. Sintesi generale
-La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei cinque host, due mostrano un elenco dettagliato di porte/servizi (.105 e .106), mentre tre rispondono come host VirtualBox / infrastruttura di rete con porte tutte in stati ignorati/chiusi o fingerprint non univoci (.1, .100, .104). L'host .104 non viene riportato in quanto si tratta della VM Kali Linux utilizzata per la scansione. 
+La scansione ha rilevato tre host attivi sulla subnet `192.168.56.1/24`. Dei cinque host, due mostrano un elenco dettagliato di porte/servizi (.105 e .106), mentre tre rispondono come host VirtualBox / infrastruttura di rete con porte tutte in stati ignorati/chiusi o fingerprint non univoci (.1, .100, .104). L'host .104 non viene riportato in quanto si tratta della VM Kali Linux utilizzata per la scansione. 
 
 ---
 
 ## 2. Tabella sintetica degli host (dati estratti da `scans/discovery.nmap`)
 
-| IP | Hostname (se presente) | Porte / Servizi principali | OS / note di fingerprint |
-|-----|------------------------|---------------------------------------|--------------------------|
-| 192.168.56.1 | — | Tutte le 1000 porte scansionate in stati ignorati. Not shown: 846 closed, 147 filtered, 7 filtered (admin-prohibited). | MAC: `0A:00:27:00:00:00`. Too many fingerprints match — info OS non univoca. Network Distance: 1 hop. |
-| 192.168.56.100 | — | Tutte le 1000 porte in stati ignorati (1000 filtered tcp). | MAC: `08:00:27:A0:92:4B` (Oracle VirtualBox NIC). Too many fingerprints match — probabilmente VM guest VirtualBox. Network Distance: 1 hop. |
-| 192.168.56.105 | metasploitable-like host | 21, 22, 23, 25, 53, 80, 111, 139, 445, 512, 513, 514, 1099, 1524, 2049, 2121, 3306, 5432, 5900, 6000, 6667, 8009, 8180 | MAC Address: `08:00:27:C0:9E:18` (PCS Systemtechnik/Oracle VirtualBox virtual NIC). Device type: general purpose. Running: Linux 2.6.x (OS CPE: cpe:/o:linux:linux_kernel:2.6). Network Distance: 1 hop. Service info: host names e servizi multipli (metasploitable.localdomain ecc.). |
-| 192.168.56.106 | web-target / Apache | 80/tcp open — Apache httpd 2.4.58. (solo porta 80 mostrata come open). | MAC Address: `08:00:27:F1:C4:7C` (PCS Systemtechnik/Oracle VirtualBox virtual NIC). Device type: general purpose or router. OS detection: Linux 4.x/5.x or MikroTik RouterOS 7.x (range di fingerprint multiple). Network Distance: 1 hop. |
+| IP | Porte / Servizi principali | OS / note di fingerprint |
+|----|----------------------------|--------------------------|
+| 192.168.56.1 | ssh/22 (closed), dnsmasq/53 | MAC: `52:54:00:FB:8D:F4` (QEMU virtual nic). No exact OS matches for host. Network Distance: 1 hop. |
+| 192.168.56.105 | 21, 22, 23, 25, 53, 80, 111, 139, 445, 512, 513, 514, 1099, 1524, 2049, 2121, 3306, 5432, 5900, 6000, 6667, 8009, 8180 | MAC Address: `52:54:00:C2:D5:7C` (QEMU virtual nic). Device type: general purpose. Running: Linux 2.6.x (OS CPE: cpe:/o:linux:linux_kernel:2.6). Network Distance: 1 hop. Service Info: Hosts:  metasploitable.localdomain, irc.Metasploitable.LAN; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel |
+| 192.168.56.104 | All 1000 scanned ports on kali.labnet (192.168.56.104) are in ignored states. Not shown: 1000 closed tcp ports (reset) | Too many fingerprints match this host to give specific OS details
+Network Distance: 0 hops |
+
 
 ---
 
@@ -50,33 +51,7 @@ La scansione ha rilevato **5 host attivi** sulla subnet `192.168.56.1/24`. Dei c
 
 ---
 
-## 4. Dettaglio host — 192.168.56.106 (web server Apache)
-
-**File di riferimento:** `scans/discovery.nmap`.
-
-**Servizi:**
-- 80/tcp open — Apache httpd 2.4.58
-
----
-
-## 5. Host infrastrutturali — 192.168.56.1, 192.168.56.100, 192.168.56.104
-
-**Sintesi (da Nmap):**
-- `192.168.56.1` — tutte le porte nello stato ignorato; MAC `0A:00:27:00:00:00`. Fingerprint OS non univoco. Probabile ruolo di infrastruttura/bridge Host-Only.
-- `192.168.56.100` — tutte le porte filtered; MAC `08:00:27:A0:92:4B` (VirtualBox NIC). Probabile VM guest non esposta o con firewall che filtra le porte.
-- `192.168.56.104` — tutte le porte chiuse; Network Distance: 0 hops (probabile entry locale/host). Fingerprint non univoco.
-
-(Estratti completi nel file `scans/discovery.nmap`).
-
----
-
-## 6. Riferimenti evidenza
-- `scans/discovery.nmap` — output Nmap (raw).  
-- `scans/discovery.xml` — XML Nmap per analisi strutturata.  
-
----
-
-## 7. Note finali sul contenuto del file
-Questo documento riassume fedelmente le informazioni ricavate dall'output `scans/discovery.nmap`. Per consultare le singole righe raw e i dettagli dei template trovati, aprire i file indicati nella cartella `scans/`.
+## 4. Riferimenti evidenza
+- `scans/discovery.nmap` — output Nmap (raw).   
 
 ---

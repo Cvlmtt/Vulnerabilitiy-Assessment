@@ -302,3 +302,4 @@ Impact: Un attacco di tipo MITM può intercettare e modificare il traffico SMB t
   -  Tool: Nmap (smb-os-discovery), Nuclei
   -  Description: Il server espone informazioni su OS e versione di Samba
   -  Impact: Informazioni utili per attacchi mirati
+ 
