@@ -250,3 +250,55 @@ Tool: Nikto, Nuclei
 Description: Mancano header di sicurezza standard (X-Frame-Options, CSP, HSTS, ecc.).
 Impact: Non causano vulnerabilità dirette, ma permettono attacchi come clickjacking, downgrade HTTPS, trasformazioni MIME e leakage referer.
 
+# Samba (port 139/445)
+
+## Vulnerabilità confermate
+
+### 1. Remote Shell Command Execution Vulnerability
+Severity: Medium
+Tool: OpenVAS
+Description: Le versioni di Samba dalla 3.0.0 alla 3.0.25rc3 sono vulnerabili ad un Remote Shell Command Execution
+Imapct: Permette ad un attaccante di eseguire shell commands arbitrari con i privilegi dell'applicazione sui sistemi affetti
+CVEs:
+- CVE-2007-2447
+Check:
+![Samba Remote Shell Command Execution](img/Samba.png)
+
+### 2. Weak / Defaul SMB Credentials Allowed
+Severity: High
+Tool: Nmap (smb-brute)
+Description: Il servizio SMB accetta credenziali deboli o di default, come `msfadmin:msfadmin` e `user:user`.
+Impact: Un attaccatnte può ottenere accesso autenticato al servizio SMB accedendo a condivisioni di rete con permessi di lettura/scrittura. 
+Check: 
+![Samba list shared files with default credentials](img/smbclient.png)
+
+### 3. Insecure SMB Share Permissions
+Severity: Medium
+Tool: Nmap (smb-enum-shares, smb-ls)
+Description: Le condivisioni SMB sono configurate con permessi eccessivamente permissivi. In particolare la share `tmp` consente accesso anonimo in lettura e le sher `tmp, opt, msfadmin, print$` risultano scrivibili per l'utente autenticato `msfadmin`
+Impact: Con questa configurazione chiunque può leggere file nello share `tmp` senza autenticazione, inoltre, se un attaccante compromette un utente con privilegi minimi può caricare/eseguire file, modificare configurazioni o depositare strumenti di attacco. In fine, la configurazione espone a possibili data leakage e/o data tampering. 
+Check: 
+![Samba list file with anonymous access](img/anon-smb.png)
+![Samba put file with msfadmin user](img/put-smb.png)
+
+### 4. SMBv1 Protocol Enabled / SMB 1.0 Only
+Severity: Medium
+Tool: Nmap (smb-protocols), Nuclei
+Description: Il server SMB supporta esclusivamente il protocollo SMBv1, una versione obsoleta e considerata insicura
+Impact: L'uso di SMBv1 aumenta significativamente la superficie di attacco.
+
+### 5. SMB Message Signing Disabled
+Severity: Medium
+Tool: Nmap (smb-security-mode)
+Description: Il server SMB ha la firma dei messaggi disabilitata. I pacchetti SMB non sono firmati crittograficamente e quindi la loro integrità non è garantita
+Impact: Un attacco di tipo MITM può intercettare e modificare il traffico SMB tra client e server compromettendo l'integrità dei dati condivisi senza essere rilevato. 
+
+### Informational
+- SMB User Enumeration:
+  - Tool: Nmap (smb-enum-uesers)
+  - Description: È possibile enumerare gli account locali del sistema
+  - Impact: Facilita attacchi di brute-force mirato e social engineering
+- SMB / NTLM Version & OS Discolsure:
+  -  Tool: Nmap (smb-os-discovery), Nuclei
+  -  Description: Il server espone informazioni su OS e versione di Samba
+  -  Impact: Informazioni utili per attacchi mirati
