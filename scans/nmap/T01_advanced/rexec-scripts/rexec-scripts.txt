@@ -1,0 +1,16 @@
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-11-29 05:59 CST
+NSE: [rexec-brute] usernames: Time limit 10m00s exceeded.
+NSE: [rexec-brute] usernames: Time limit 10m00s exceeded.
+NSE: [rexec-brute] passwords: Time limit 10m00s exceeded.
+Nmap scan report for metasploitable2.labnet (192.168.56.105)
+Host is up (0.00027s latency).
+
+PORT    STATE SERVICE
+512/tcp open  exec
+| rexec-brute: 
+|   Accounts: 
+|     user:user - Valid credentials
+|_  Statistics: Performed 5855 guesses in 601 seconds, average tps: 9.5
+MAC Address: 52:54:00:C2:D5:7C (QEMU virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 601.93 seconds

@@ -1,6 +1,6 @@
 # FTP Service (Port 21)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. vstfpd 2.3.4 Backdoor (CVE-2011-2523)
 Severity: Critical
@@ -30,7 +30,7 @@ Check: `ftp msfadmin@IP_TARGET` and `passoword=msfadmin`
 
 # SSH Service (Port 22)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. Outdated and weak SSH cryptographic configuration
 Severity: Medium
@@ -50,7 +50,7 @@ Check: testare credenziali comuni o default
 
 # Telnet Service (Port 23)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. Telnet Service Enabled
 Severity: High
@@ -71,7 +71,7 @@ Impact: Accesso remoto completo con bruteforce
 
 # SMTP Service (Port 25)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. SATRTTLS Plaintext Command Injection
 Severity: Medium
@@ -111,13 +111,13 @@ Impact: possibili attacchi MITM e downgrade
 
 # DNS service (Port 53)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 Nessuna vulnerabilità è stat rilevata da OpenVAS, Nmap o Nuclei sulla porta 53/tcp.
 Nessuno degli strumenti ha riportato CVE, misconfigurazioni o problemi di sicurezza relativi al servizio DNS.
 
 # HTTP service (port 80)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. Outdated Apache/PHP
 Severity: High
@@ -252,7 +252,7 @@ Impact: Non causano vulnerabilità dirette, ma permettono attacchi come clickjac
 
 # Samba (port 139/445)
 
-## Vulnerabilità confermate
+## Confirmed Vulnerabilities
 
 ### 1. Remote Shell Command Execution Vulnerability
 Severity: Medium
@@ -303,3 +303,8 @@ Impact: Un attacco di tipo MITM può intercettare e modificare il traffico SMB t
   -  Description: Il server espone informazioni su OS e versione di Samba
   -  Impact: Informazioni utili per attacchi mirati
  
+# Rexec (Port 512)
+
+## Confirmed Vulnerabilities
+
+### 1. Recex service 
